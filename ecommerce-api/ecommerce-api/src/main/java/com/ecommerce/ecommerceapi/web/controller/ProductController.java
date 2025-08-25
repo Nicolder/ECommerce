@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RestController // 1. Anotação principal para criar um controller REST
-@RequestMapping("/api/products") // 2. Define a URL base para todos os endpoints nesta classe
+@RestController //Anotação principal para criar um controller REST
+@RequestMapping("/api/products") // URL
 public class ProductController {
 
-    // 3. Injeção de Dependência via construtor (melhor prática)
     private final ProductRepository productRepository;
 
     public ProductController(ProductRepository productRepository) {
@@ -22,20 +21,20 @@ public class ProductController {
 
     // --- ENDPOINTS
 
-    // 4. Endpoint para CRIAR um novo produto (HTTP POST)
+    // 4. Endpoint Novo produto
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         Product savedProduct = productRepository.save(product);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED); // Retorna 201 Created
     }
 
-    // 5. Endpoint para LISTAR TODOS os produtos (HTTP GET)
+    // 5. Endpoint Lista todos
     @GetMapping
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
-    // 6. Endpoint para BUSCAR UM produto por ID (HTTP GET)
+    // 6. Endpoint Busca produto
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         Optional<Product> productOptional = productRepository.findById(id);
