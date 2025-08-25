@@ -15,23 +15,22 @@ import java.time.LocalDateTime;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(nullable = false, length = 100)
     private String name;
-
-    @Column(unique = true, nullable = false)
-    private String sku;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "price", nullable = false, precision = 19, scale = 2)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @Column(nullable = false)
-    private Integer stockQuantity;
+    @Column
+    private String imageUrl; //Imagem
+
+    @Column
+    private String category; //Categoria
 
     private boolean active = true;
 
